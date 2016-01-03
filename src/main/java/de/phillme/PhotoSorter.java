@@ -47,6 +47,7 @@ public class PhotoSorter {
 
     // assumes the current class is called logger
     private final static Logger LOGGER = Logger.getLogger(PhotoSorter.class.getName());
+    private boolean parseFromEXIF = true;
 
     public PhotoSorter(CommandLine commandLine) {
         LOGGER.setLevel(Level.INFO);
@@ -84,13 +85,12 @@ public class PhotoSorter {
         //System.out.println(sDateinEurope);
     }
 
-    private void parseFile(Path entry, boolean lastFile) throws ImageProcessingException, IOException, ParseException {
-        Date date = parseDateFromFileName(entry.getFileName().toString());
+    private void parseFile(PhotoFile photoFile, boolean lastFile) throws ImageProcessingException, IOException, ParseException {
 
-        detectNewEvent(entry, this.dateOld, date, lastFile);
-        this.dateOld = date;
+        detectNewEvent(photoFile, this.dateOld, photoFile.getPhotoDate(), lastFile);
+        this.dateOld = photoFile.getPhotoDate();
 
-        LOGGER.finest(entry.getFileName().toString());
+        LOGGER.finest(photoFile.getFilePath().toString());
     }
 
     private Date parseDateFromFileName(String fileName) throws ParseException {
@@ -104,7 +104,48 @@ public class PhotoSorter {
         return date;
     }
 
-    public void movePhotoToEvent(Path photo, Date eventStartDate) throws IOException {
+    private String getFileBase(String fileName) {
+        String[] tokens = fileName.split("\\.(?=[^\\.]+$)");
+        //LOGGER.info(Arrays.toString(tokens));
+        if (tokens.length > 0) {
+            String fileBase = "";
+            for (int i = 0; i < (tokens.length - 1); i++) {
+                fileBase += tokens[i];
+            }
+            return fileBase;
+
+        } else {
+            //TODO better error handling here.
+            return null;
+        }
+    }
+
+    private boolean moveRelevantFiles(String targetParent, PhotoFile photoFile) throws IOException {
+        //TODO is this all safe?
+        List<String> list = photoFile.getSupportedFileExtensions();
+
+        for (String ext :
+                list) {
+            String tmpFileBase = getFileBase(photoFile.getFilePath().getFileName().toString());
+
+            if (tmpFileBase != null) {
+                File movableFile = new File(photoFile.getFilePath().getParent().toString() + File.separator + tmpFileBase + "." + ext);
+                if (movableFile.exists()) {
+                    Path targetPath = Paths.get(targetParent + File.separator + movableFile.getName());
+                    if (this.write) {
+                        System.out.println("Moving " + targetPath);
+                        Files.move((movableFile.toPath()), targetPath);
+                    } else {
+                        System.out.println("Would move " + targetPath);
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public void movePhotoToEvent(PhotoFile photoFile, Date eventStartDate) throws IOException {
         SimpleDateFormat sdfEurope = new SimpleDateFormat(this.dateFormatFolders);
         sdfEurope.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
         String sDateinEurope = sdfEurope.format(eventStartDate) + this.eventFileSuffix;
@@ -116,22 +157,18 @@ public class PhotoSorter {
             boolean success = (new File(eventPath)).mkdirs();
         }
 
-        Path targetDir = Paths.get(this.photosPath + File.separator + sDateinEurope + File.separator + photo.getFileName());
-
-        if (this.write) {
-            Files.move(photo, targetDir);
-        }
+        moveRelevantFiles(eventPath, photoFile);
 
 
     }
 
-    private void detectNewEvent(Path photo, Date dateOld, Date dateNew, boolean lastFile) throws IOException {
+    private void detectNewEvent(PhotoFile photoFile, Date dateOld, Date dateNew, boolean lastFile) throws IOException {
         if (dateOld == null) {
             LOGGER.finest("Beginning... Using DateNew for first event");
             this.eventStartDate = dateNew;
             this.dateOld = dateNew;
 
-            movePhotoToEvent(photo, this.eventStartDate);
+            movePhotoToEvent(photoFile, this.eventStartDate);
             return;
         }
         long dateDiffInHours = PhotoSorter.getDateDiff(dateOld, dateNew, TimeUnit.HOURS);
@@ -143,12 +180,11 @@ public class PhotoSorter {
             this.eventList.add(handleEvent(dateOld, dateNew));
 
             this.eventStartDate = dateNew;
-
             //after the new startDate for the event is set we can move the file to the new event folder
-            movePhotoToEvent(photo, this.eventStartDate);
+            movePhotoToEvent(photoFile, this.eventStartDate);
         } else {
             //move all files to current event
-            movePhotoToEvent(photo, this.eventStartDate);
+            movePhotoToEvent(photoFile, this.eventStartDate);
 
             if (lastFile) {
                 //if this is the lastfile but has not enough time between, still add it
@@ -181,13 +217,25 @@ public class PhotoSorter {
         }
     }
 
-    List<Path> listSourceFiles() throws IOException, ImageProcessingException {
-        List<Path> result = new ArrayList<>();
-
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(this.photosPath, "*.{arw,ARW,png,PNG,jpg,JPG,xmp,XMP}")) {
+    List<PhotoFile> listSourceFiles() throws IOException, ImageProcessingException, ParseException {
+        List<PhotoFile> result = new ArrayList<>();
+        Date date = null;
+        //TODO add other raw file extensions and make them configurable
+        //png,PNG,jpg,JPG,xmp,XMP
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(this.photosPath, "*.{arw,ARW}")) {
             for (Path entry : stream) {
-                //parseFile(entry);
-                result.add(entry);
+                PhotoFile photoFile;
+                if (this.parseFromEXIF) {
+
+                    date = getDateFromExif(entry);
+                    //TODO error handling if date is null
+                    photoFile = new PhotoFile(entry, date);
+                } else {
+                    date = parseDateFromFileName(entry.getFileName().toString());
+                    photoFile = new PhotoFile(entry, date);
+                }
+
+                result.add(photoFile);
             }
         } catch (DirectoryIteratorException ex) {
             // I/O error encounted during the iteration, the cause is an IOException
@@ -209,16 +257,16 @@ public class PhotoSorter {
         return timeUnit.convert(diffInMillies, TimeUnit.MILLISECONDS);
     }
 
-    List<Path> sortList(List<Path> files) {
-        Collections.sort(files, new Comparator<Path>() {
-            public int compare(Path o1, Path o2) {
-                return o1.getFileName().compareTo(o2.getFileName());
+    List<PhotoFile> sortList(List<PhotoFile> files) {
+        Collections.sort(files, new Comparator<PhotoFile>() {
+            public int compare(PhotoFile o1, PhotoFile o2) {
+                return o1.getPhotoDate().compareTo(o2.getPhotoDate());
             }
         });
         return files;
     }
 
-    void flagAllEvents(List<Path> sortedList) throws ImageProcessingException, IOException, ParseException {
+    void flagAllEvents(List<PhotoFile> sortedList) throws ImageProcessingException, IOException, ParseException {
         for (int i = 0; i < sortedList.size(); i++) {
             if (i == sortedList.size() - 1) {
                 parseFile(sortedList.get(i), true);
@@ -254,13 +302,13 @@ public class PhotoSorter {
             }
 
             PhotoSorter photoSorter = new PhotoSorter(line);
-            List<Path> pathList;
-            List sortedList;
+            List<PhotoFile> photoFileList;
+            List<PhotoFile> sortedList;
 
-            pathList = photoSorter.listSourceFiles();
-            sortedList = photoSorter.sortList(pathList);
+            photoFileList = photoSorter.listSourceFiles();
+            sortedList = photoSorter.sortList(photoFileList);
 
-            LOGGER.finest(photoSorter.sortList(pathList).toString());
+            LOGGER.finest(sortedList.toString());
             photoSorter.flagAllEvents(sortedList);
 
             photoSorter.printEventList(photoSorter.getEventList());
@@ -269,13 +317,13 @@ public class PhotoSorter {
 
 
         } catch (org.apache.commons.cli.ParseException e) {
-            LOGGER.severe(e.getLocalizedMessage());
+            e.printStackTrace();
         } catch (IOException e) {
-            LOGGER.severe(e.getLocalizedMessage());
+            e.printStackTrace();
         } catch (ImageProcessingException e) {
-            LOGGER.severe(e.getLocalizedMessage());
+            e.printStackTrace();
         } catch (ParseException e) {
-            LOGGER.severe(e.getLocalizedMessage());
+            e.printStackTrace();
         }
 
 

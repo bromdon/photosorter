@@ -17,6 +17,9 @@ public class PhotoConfig {
     //Option quiet = new Option("quiet", "be extra quiet");
     //Option verbose = new Option("verbose", "be extra verbose");
     Option write = new Option("w", "write-changes", false, "Write changes. Otherwise no changes are written! ");
+    //Option parseFromExif = new Option("E", "parse-from-exif", false, "Default is true. Date is parsed from the exif data of the photo files.");
+    //TODO specify exif options
+    //TODO specify mandatory options.
 
     Option minHoursBetweenEvents = OptionBuilder.withArgName("hours")
             .hasArg()
@@ -42,6 +45,7 @@ public class PhotoConfig {
             .hasArg()
             .withDescription("Absolute path to photos.")
             .create("path");
+
 
     Options options = new Options();
 
