@@ -14,16 +14,13 @@ import java.util.*;
 public class PhotoFile {
     private Path filePath;
     private Date photoDate;
-    private List<String> supportedFileExtensions = new ArrayList<>();
+    private List<String> supportedMetaDataFileExtensions = new ArrayList<>();
 
     public PhotoFile(Path filePath, Date photoDate) {
-        //TODO make this configurable
-        this.supportedFileExtensions.add("arw.xmp");
-        this.supportedFileExtensions.add("ARW.XMP");
-        this.supportedFileExtensions.add("jpg");
-        this.supportedFileExtensions.add("JPG");
-        this.supportedFileExtensions.add("ARW");
-        this.supportedFileExtensions.add("arw");
+        //this.supportedMetaDataFileExtensions.add("arw.xmp");
+        //this.supportedMetaDataFileExtensions.add("ARW.XMP");
+        this.supportedMetaDataFileExtensions.add("xmp");
+        this.supportedMetaDataFileExtensions.add("XMP");
 
         this.filePath = filePath;
         this.photoDate = photoDate;
@@ -45,12 +42,12 @@ public class PhotoFile {
         this.photoDate = photoDate;
     }
 
-    public List<String> getSupportedFileExtensions() {
-        return supportedFileExtensions;
+    public List<String> getSupportedMetaDataFileExtensions() {
+        return supportedMetaDataFileExtensions;
     }
 
-    public void setSupportedFileExtensions(List<String> supportedFileExtensions) {
-        this.supportedFileExtensions = supportedFileExtensions;
+    public void setSupportedMetaDataFileExtensions(List<String> supportedMetaDataFileExtensions) {
+        this.supportedMetaDataFileExtensions = supportedMetaDataFileExtensions;
     }
 
     @Override

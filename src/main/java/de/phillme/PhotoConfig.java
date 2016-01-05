@@ -18,18 +18,12 @@ public class PhotoConfig {
     //Option verbose = new Option("verbose", "be extra verbose");
     Option write = new Option("w", "write-changes", false, "Write changes. Otherwise no changes are written! ");
     //Option parseFromExif = new Option("E", "parse-from-exif", false, "Default is true. Date is parsed from the exif data of the photo files.");
-    //TODO specify exif options
     //TODO specify mandatory options.
 
     Option minHoursBetweenEvents = OptionBuilder.withArgName("hours")
             .hasArg()
             .withDescription("A new event is assumed when more than these hours have passed")
             .create("minhours");
-
-    Option dateFormatPhotos = OptionBuilder.withArgName("dateformat")
-            .hasArg()
-            .withDescription("java date format for photo files to extract date from file name")
-            .create("dfp");
 
     Option dateFormatEvents = OptionBuilder.withArgName("dateformat")
             .hasArg()
@@ -55,7 +49,6 @@ public class PhotoConfig {
         //options.addOption(quiet);
         //options.addOption(verbose);
         options.addOption(minHoursBetweenEvents);
-        options.addOption(dateFormatPhotos);
         options.addOption(dateFormatEvents);
         options.addOption(splitDateChar);
         options.addOption(photoPath);

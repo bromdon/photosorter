@@ -8,6 +8,7 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
+import org.apache.tika.Tika;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,10 +48,11 @@ public class PhotoSorter {
 
     // assumes the current class is called logger
     private final static Logger LOGGER = Logger.getLogger(PhotoSorter.class.getName());
-    private boolean parseFromEXIF = true;
+    private final Tika tika = new Tika();
 
     public PhotoSorter(CommandLine commandLine) {
         LOGGER.setLevel(Level.INFO);
+
         this.hoursBetweenEvents = Integer.parseInt(commandLine.getOptionValue("minhours", "36"));
         this.dateFormatPhotos = commandLine.getOptionValue("dfp", "yyyy-MM-dd'T'HHmm");
         this.dateFormatFolders = commandLine.getOptionValue("dfe", "yyyy-MM-dd");
@@ -65,6 +67,7 @@ public class PhotoSorter {
             System.out.println("\nPhotoSorter starting in dry-run mode. No changes written. \nIf you want to write changes add '-w' as an option.\nUse '-h' for help.\n");
         }
 
+
     }
 
     Date getDateFromExif(Path photo) throws ImageProcessingException, IOException {
@@ -73,7 +76,7 @@ public class PhotoSorter {
         // obtain the Exif directory
         ExifSubIFDDirectory directory
                 = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
-
+        //TODO make timezone configurable
 // query the tag's value
         Date date
                 = directory.getDate(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL, TimeZone.getTimeZone("Europe/Berlin"));
@@ -120,10 +123,36 @@ public class PhotoSorter {
         }
     }
 
+    private String getFileExt(String fileName) {
+        String[] tokens = fileName.split("\\.(?=[^\\.]+$)");
+        //LOGGER.info(Arrays.toString(tokens));
+        if (tokens.length > 0) {
+            String fileExt = "";
+            fileExt += tokens[tokens.length - 1];
+            System.out.println("File ext is " + fileExt);
+            return fileExt;
+
+        } else {
+            //TODO better error handling here.
+            return null;
+        }
+    }
+
+
     private boolean moveRelevantFiles(String targetParent, PhotoFile photoFile) throws IOException {
         //TODO is this all safe?
-        List<String> list = photoFile.getSupportedFileExtensions();
+        List<String> list = photoFile.getSupportedMetaDataFileExtensions();
+        //Move original file
+        Path targetPath = Paths.get(targetParent + File.separator + photoFile.getFilePath().getFileName());
+        if (this.write) {
+            System.out.println("Moving to " + targetPath);
+            System.out.println("##### " + photoFile.getFilePath());
+            Files.move((photoFile.getFilePath()), targetPath);
+        } else {
+            System.out.println("Would move to " + targetPath);
+        }
 
+        //Move metadata files
         for (String ext :
                 list) {
             String tmpFileBase = getFileBase(photoFile.getFilePath().getFileName().toString());
@@ -131,12 +160,12 @@ public class PhotoSorter {
             if (tmpFileBase != null) {
                 File movableFile = new File(photoFile.getFilePath().getParent().toString() + File.separator + tmpFileBase + "." + ext);
                 if (movableFile.exists()) {
-                    Path targetPath = Paths.get(targetParent + File.separator + movableFile.getName());
+                    targetPath = Paths.get(targetParent + File.separator + movableFile.getName());
                     if (this.write) {
-                        System.out.println("Moving " + targetPath);
+                        System.out.println("Moving meta file to " + targetPath);
                         Files.move((movableFile.toPath()), targetPath);
                     } else {
-                        System.out.println("Would move " + targetPath);
+                        System.out.println("Would move meta file to " + targetPath);
                     }
                 }
             }
@@ -222,18 +251,19 @@ public class PhotoSorter {
         Date date = null;
         //TODO add other raw file extensions and make them configurable
         //png,PNG,jpg,JPG,xmp,XMP
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(this.photosPath, "*.{arw,ARW}")) {
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(this.photosPath, "*.*")) {
             for (Path entry : stream) {
                 PhotoFile photoFile;
-                if (this.parseFromEXIF) {
+
+                String fileType = detectMimeType(entry);
+                //String fileExt = getFileExt(entry.getFileName().toString());
+
+                if (fileType != null && fileType.contains("image")) {
 
                     date = getDateFromExif(entry);
-                    //TODO error handling if date is null
-                    photoFile = new PhotoFile(entry, date);
-                } else {
-                    date = parseDateFromFileName(entry.getFileName().toString());
-                    photoFile = new PhotoFile(entry, date);
                 }
+                //TODO error handling if date is null
+                photoFile = new PhotoFile(entry, date);
 
                 result.add(photoFile);
             }
@@ -243,6 +273,34 @@ public class PhotoSorter {
         }
         return result;
     }
+
+    /*Map<String, String> probeFiletypes() throws IOException, ImageProcessingException, ParseException, TikaException, SAXException {
+        Map<String, String> result = new HashMap<>();
+
+        System.out.println("Probing for filetypes...");
+        Date date = null;
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(this.photosPath, "*")) {
+            for (Path entry : stream) {
+                PhotoFile photoFile;
+                //String fileType = Files.probeContentType(entry);
+                String fileType = detectMimeType(entry);
+                String fileExt = getFileExt(entry.getFileName().toString());
+                if (fileType != null && fileType.contains("image")) {
+
+                    if (result.get(fileType + ":" + fileExt) == null) {
+                        result.put(fileType, fileExt);
+                        System.out.println("Found " + fileType);
+
+                    }
+
+                }
+            }
+        } catch (DirectoryIteratorException ex) {
+            // I/O error encounted during the iteration, the cause is an IOException
+            throw ex.getCause();
+        }
+        return result;
+    } */
 
     /**
      * Get a diff between two dates
@@ -277,6 +335,10 @@ public class PhotoSorter {
 
     }
 
+    public String detectMimeType(Path pathToDetect) throws IOException {
+        return tika.detect(pathToDetect);
+    }
+
     public List<PhotoEvent> getEventList() {
         return eventList;
     }
@@ -305,6 +367,7 @@ public class PhotoSorter {
             List<PhotoFile> photoFileList;
             List<PhotoFile> sortedList;
 
+            //photoSorter.probeFiletypes();
             photoFileList = photoSorter.listSourceFiles();
             sortedList = photoSorter.sortList(photoFileList);
 
