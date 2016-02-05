@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="da9ce77e-6e6e-4ea2-adc4-28e1dea81a64" name="Default" comment="Checking Todos and im">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/taskArtifacts.bin" />
+    <list default="true" id="da9ce77e-6e6e-4ea2-adc4-28e1dea81a64" name="Default" comment="Checking Todos and minor cleanup">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/photosorter.ipr" afterPath="$PROJECT_DIR$/photosorter.ipr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/photosorter.iws" afterPath="$PROJECT_DIR$/photosorter.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/phillme/PhotoConfig.java" afterPath="$PROJECT_DIR$/src/main/java/de/phillme/PhotoConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/phillme/PhotoEvent.java" afterPath="$PROJECT_DIR$/src/main/java/de/phillme/PhotoEvent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/phillme/PhotoExtension.java" afterPath="$PROJECT_DIR$/src/main/java/de/phillme/PhotoExtension.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/phillme/PhotoFile.java" afterPath="$PROJECT_DIR$/src/main/java/de/phillme/PhotoFile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/phillme/PhotoMover.java" afterPath="$PROJECT_DIR$/src/main/java/de/phillme/PhotoMover.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/phillme/PhotoSorter.java" afterPath="$PROJECT_DIR$/src/main/java/de/phillme/PhotoSorter.java" />
     </list>
     <ignored path="photosorter.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -81,14 +83,14 @@
       <file leaf-file-name="PhotoSorter.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoSorter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.8301888">
-              <caret line="338" column="52" selection-start-line="338" selection-start-column="20" selection-end-line="338" selection-end-column="20" />
+            <state vertical-scroll-proportion="1.1320754">
+              <caret line="76" column="40" selection-start-line="76" selection-start-column="20" selection-end-line="76" selection-end-column="20" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#13146#13147#0" expanded="true" />
-                <element signature="e#13231#13232#0" expanded="true" />
-                <element signature="e#13811#13812#0" expanded="true" />
-                <element signature="e#13843#13844#0" expanded="true" />
+                <element signature="e#0#18433#0" expanded="true" />
+                <element signature="e#16218#16219#0" expanded="true" />
+                <element signature="e#16303#16304#0" expanded="true" />
+                <element signature="e#16883#16884#0" expanded="true" />
+                <element signature="e#16915#16916#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -98,7 +100,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoFile.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+              <caret line="45" column="26" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -110,7 +112,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoMover.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="14" selection-end-column="5" />
+              <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="40" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -122,7 +124,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoConfig.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="89" selection-start-line="22" selection-start-column="89" selection-end-line="22" selection-end-column="89" />
+              <caret line="48" column="89" selection-start-line="48" selection-start-column="89" selection-end-line="48" selection-end-column="89" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -134,7 +136,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoEvent.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="53" column="18" selection-start-line="53" selection-start-column="18" selection-end-line="53" selection-end-column="18" />
+              <caret line="79" column="18" selection-start-line="79" selection-start-column="18" selection-end-line="79" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -164,7 +166,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoExtension.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="13" column="72" selection-start-line="13" selection-start-column="72" selection-end-line="13" selection-end-column="72" />
+              <caret line="39" column="72" selection-start-line="39" selection-start-column="72" selection-end-line="39" selection-end-column="72" />
               <folding />
             </state>
           </provider>
@@ -703,7 +705,7 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="copyright.profiles" />
+    <property name="settings.editor.selected.configurable" value="copyright" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
@@ -1275,7 +1277,7 @@
       <workItem from="1452016563348" duration="4738000" />
       <workItem from="1454701617464" duration="77000" />
       <workItem from="1454701792260" duration="1049000" />
-      <workItem from="1454702864416" duration="4313000" />
+      <workItem from="1454702864416" duration="5058000" />
     </task>
     <task id="LOCAL-00001" summary="Works with exif but cleanup still missing">
       <created>1451864008544</created>
@@ -1295,7 +1297,13 @@
       <option name="project" value="LOCAL" />
       <updated>1454707632306</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Checking Todos and minor cleanup">
+      <created>1454707946174</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1454707946174</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1307,7 +1315,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55185000" />
+    <option name="totallyTimeSpent" value="55930000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1368,7 +1376,8 @@
     <MESSAGE value="Works with exif but cleanup still missing" />
     <MESSAGE value="First working draft based on only exif information." />
     <MESSAGE value="Checked todos and very little polishing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Checked todos and very little polishing" />
+    <MESSAGE value="Checking Todos and minor cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Checking Todos and minor cleanup" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1427,11 +1436,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="90" column="18" selection-start-line="90" selection-start-column="17" selection-end-line="90" selection-end-column="18" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#13146#13147#0" expanded="true" />
-            <element signature="e#13231#13232#0" expanded="true" />
-            <element signature="e#13811#13812#0" expanded="true" />
-            <element signature="e#13843#13844#0" expanded="true" />
+            <element signature="e#0#18433#0" expanded="true" />
+            <element signature="e#16218#16219#0" expanded="true" />
+            <element signature="e#16303#16304#0" expanded="true" />
+            <element signature="e#16883#16884#0" expanded="true" />
+            <element signature="e#16915#16916#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1503,11 +1512,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="90" column="18" selection-start-line="90" selection-start-column="17" selection-end-line="90" selection-end-column="18" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#13146#13147#0" expanded="true" />
-            <element signature="e#13231#13232#0" expanded="true" />
-            <element signature="e#13811#13812#0" expanded="true" />
-            <element signature="e#13843#13844#0" expanded="true" />
+            <element signature="e#0#18433#0" expanded="true" />
+            <element signature="e#16218#16219#0" expanded="true" />
+            <element signature="e#16303#16304#0" expanded="true" />
+            <element signature="e#16883#16884#0" expanded="true" />
+            <element signature="e#16915#16916#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1579,11 +1588,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#13146#13147#0" expanded="true" />
-            <element signature="e#13231#13232#0" expanded="true" />
-            <element signature="e#13811#13812#0" expanded="true" />
-            <element signature="e#13843#13844#0" expanded="true" />
+            <element signature="e#0#18433#0" expanded="true" />
+            <element signature="e#16218#16219#0" expanded="true" />
+            <element signature="e#16303#16304#0" expanded="true" />
+            <element signature="e#16883#16884#0" expanded="true" />
+            <element signature="e#16915#16916#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1647,11 +1656,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="277" column="32" selection-start-line="277" selection-start-column="32" selection-end-line="277" selection-end-column="32" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#13146#13147#0" expanded="true" />
-            <element signature="e#13231#13232#0" expanded="true" />
-            <element signature="e#13811#13812#0" expanded="true" />
-            <element signature="e#13843#13844#0" expanded="true" />
+            <element signature="e#0#18433#0" expanded="true" />
+            <element signature="e#16218#16219#0" expanded="true" />
+            <element signature="e#16303#16304#0" expanded="true" />
+            <element signature="e#16883#16884#0" expanded="true" />
+            <element signature="e#16915#16916#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1705,11 +1714,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="277" column="32" selection-start-line="277" selection-start-column="32" selection-end-line="277" selection-end-column="32" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#13146#13147#0" expanded="true" />
-            <element signature="e#13231#13232#0" expanded="true" />
-            <element signature="e#13811#13812#0" expanded="true" />
-            <element signature="e#13843#13844#0" expanded="true" />
+            <element signature="e#0#18433#0" expanded="true" />
+            <element signature="e#16218#16219#0" expanded="true" />
+            <element signature="e#16303#16304#0" expanded="true" />
+            <element signature="e#16883#16884#0" expanded="true" />
+            <element signature="e#16915#16916#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1763,11 +1772,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#13146#13147#0" expanded="true" />
-            <element signature="e#13231#13232#0" expanded="true" />
-            <element signature="e#13811#13812#0" expanded="true" />
-            <element signature="e#13843#13844#0" expanded="true" />
+            <element signature="e#0#18433#0" expanded="true" />
+            <element signature="e#16218#16219#0" expanded="true" />
+            <element signature="e#16303#16304#0" expanded="true" />
+            <element signature="e#16883#16884#0" expanded="true" />
+            <element signature="e#16915#16916#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1806,7 +1815,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoMover.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="14" selection-end-column="5" />
+          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="40" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1816,7 +1825,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoEvent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="53" column="18" selection-start-line="53" selection-start-column="18" selection-end-line="53" selection-end-column="18" />
+          <caret line="79" column="18" selection-start-line="79" selection-start-column="18" selection-end-line="79" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -1824,7 +1833,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="89" selection-start-line="22" selection-start-column="89" selection-end-line="22" selection-end-column="89" />
+          <caret line="48" column="89" selection-start-line="48" selection-start-column="89" selection-end-line="48" selection-end-column="89" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1834,7 +1843,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoExtension.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="72" selection-start-line="13" selection-start-column="72" selection-end-line="13" selection-end-column="72" />
+          <caret line="39" column="72" selection-start-line="39" selection-start-column="72" selection-end-line="39" selection-end-column="72" />
           <folding />
         </state>
       </provider>
@@ -1842,7 +1851,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoFile.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+          <caret line="45" column="26" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1851,14 +1860,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoSorter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.8301888">
-          <caret line="338" column="52" selection-start-line="338" selection-start-column="20" selection-end-line="338" selection-end-column="20" />
+        <state vertical-scroll-proportion="1.1320754">
+          <caret line="76" column="40" selection-start-line="76" selection-start-column="20" selection-end-line="76" selection-end-column="20" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#13146#13147#0" expanded="true" />
-            <element signature="e#13231#13232#0" expanded="true" />
-            <element signature="e#13811#13812#0" expanded="true" />
-            <element signature="e#13843#13844#0" expanded="true" />
+            <element signature="e#0#18433#0" expanded="true" />
+            <element signature="e#16218#16219#0" expanded="true" />
+            <element signature="e#16303#16304#0" expanded="true" />
+            <element signature="e#16883#16884#0" expanded="true" />
+            <element signature="e#16915#16916#0" expanded="true" />
           </folding>
         </state>
       </provider>
