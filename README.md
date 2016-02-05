@@ -1,30 +1,31 @@
-# photosorter
+<h1>Photosorter</h1>
 A command line tool for sorting photos to folders based on the time interval in which they were taken. 
 It uses the EXIF information of the images and thus can handle all files with meta information. 
 JPG and most raw files are definitely supported. PNG and other images with meta information should work, too.
 
-Requirements:
+<h2>Requirements:</h2>
 Java 8 or higher
 Windows or Unix/Linux
 Image files with Time meta information or same naming scheme as image files. (e.g. XMP).
 Commandline
 
-Starting:
+<h2>Starting Photosorter</h2>:
 Zip and tar distribution files with all necessary files can be found in build/distributions. An already extracted
 distribution can be found in build/install with a batch / sh file below bin/.
 
-Building with gradle:
+<h2>Building with gradle:</h2>
 'gradle buildNeeded installDist'
 
 Executable then can be found below 'build/install/photosorter/bin'
-
+<pre>
 'photosorter -h' in the bin directory shows the help.
+</pre>
 
 
-<b>Examples:</b>
+<h2>Examples:</h2>
 
-Before (files):
-
+<h2>Before (files):</h2>
+<pre>
 2014-12-01T1451_06371.arw
 2014-12-01T1451_06371.jpg
 2014-12-01T1453_06374.arw
@@ -199,11 +200,12 @@ Before (files):
 2014-12-28T1936_06463.jpg
 2014-12-28T1936_06465.arw
 2014-12-28T1936_06465.jpg
+</pre>
 
-
-After (Folders have the starting date of the first photo and contain respecting files):
-
+<h2>After (Folders have the starting date of the first photo and contain respecting files):</h2>
+<pre>
 2014-12-01-NEW_EVENT
 2014-12-21-NEW_EVENT
 2014-12-24-NEW_EVENT
 2014-12-28-NEW_EVENT
+</pre>
