@@ -13,8 +13,9 @@ Commandline<br/>
 Zip and tar distribution files with all necessary files can be found in build/distributions. An already extracted distribution can be found in build/install with a batch / sh file below bin/.
 
 <h2>Photosorter comman line arguments:<h2>
-<pre>
-usage: PhotoSorter
+All arguments are optional and contain sensible defaults.
+
+<pre>usage: PhotoSorter
  -dfe <arg>           Java date format for event folders.
  -dsplitchar <arg>    This character splits the date string from the rest
                       of the filename.
