@@ -12,33 +12,21 @@ import org.apache.commons.cli.Options;
  */
 public class PhotoConfig {
 
-    Option help = new Option("h", "help", false, "print this message");
+    Option help = new Option("h", "help", false, "Print this message.");
     //Option version = new Option("version", "print the version information and exit");
     //Option quiet = new Option("quiet", "be extra quiet");
     //Option verbose = new Option("verbose", "be extra verbose");
     Option write = new Option("w", "write-changes", false, "Write changes. Otherwise no changes are written! ");
     //Option parseFromExif = new Option("E", "parse-from-exif", false, "Default is true. Date is parsed from the exif data of the photo files.");
-    //TODO specify mandatory options.
 
-    Option minHoursBetweenEvents = OptionBuilder.withArgName("hours")
-            .hasArg()
-            .withDescription("A new event is assumed when more than these hours have passed")
-            .create("minhours");
+    Option minHoursBetweenEvents = new Option("minhours", true, "A new event is assumed when more than these hours have passed.");
+    Option timezone = new Option("timezone", true, "The timezone of the photos and events. 'Europe/Berlin' for instance. If not specified the system timezone is assumed.");
 
-    Option dateFormatEvents = OptionBuilder.withArgName("dateformat")
-            .hasArg()
-            .withDescription("java date format for event folders")
-            .create("dfe");
+    Option dateFormatEvents = new Option("dfe", true, "Java date format for event folders.");
 
-    Option splitDateChar = OptionBuilder.withArgName("datesplitcharacter")
-            .hasArg()
-            .withDescription("this character splits the date string from the rest of the filename.")
-            .create("dsplitchar");
+    Option splitDateChar = new Option("dsplitchar", true, "This character splits the date string from the rest of the filename.");
 
-    Option photoPath = OptionBuilder.withArgName("Absolute Path")
-            .hasArg()
-            .withDescription("Absolute path to photos.")
-            .create("path");
+    Option photoPath = new Option("p", "path", true, "Path to photos. If not specified the current working directory is used.");
 
 
     Options options = new Options();
@@ -49,6 +37,7 @@ public class PhotoConfig {
         //options.addOption(quiet);
         //options.addOption(verbose);
         options.addOption(minHoursBetweenEvents);
+        options.addOption(timezone);
         options.addOption(dateFormatEvents);
         options.addOption(splitDateChar);
         options.addOption(photoPath);

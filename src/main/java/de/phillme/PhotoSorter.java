@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 public class PhotoSorter {
 
 
+    private TimeZone timeZone;
     private Date dateOld;
     private Date eventStartDate;
     private Date eventEndDate;
@@ -45,7 +46,7 @@ public class PhotoSorter {
 
     private List<PhotoEvent> eventList = new ArrayList<PhotoEvent>();
 
-
+    //TODO clean up and refactor make this a bit more understandeable and mainteneable at some time
     // assumes the current class is called logger
     private final static Logger LOGGER = Logger.getLogger(PhotoSorter.class.getName());
     private final Tika tika = new Tika();
@@ -57,32 +58,36 @@ public class PhotoSorter {
         this.dateFormatPhotos = commandLine.getOptionValue("dfp", "yyyy-MM-dd'T'HHmm");
         this.dateFormatFolders = commandLine.getOptionValue("dfe", "yyyy-MM-dd");
         this.splitBetweenDateAndRest = commandLine.getOptionValue("dsplitchar", "_");
-        this.photosPath = Paths.get(commandLine.getOptionValue("path", "/home/caspar/filearea/bilder/2015/neu/alt"));
+        this.photosPath = Paths.get(commandLine.getOptionValue("p", "."));
+        this.timeZone = TimeZone.getTimeZone(commandLine.getOptionValue("timezone", Calendar.getInstance().getTimeZone().getID()));
+
         System.out.println("\r\n  _____  _           _        _____            _            \r\n |  __ \\| |         | |      / ____|          | |           \r\n | |__) | |__   ___ | |_ ___| (___   ___  _ __| |_ ___ _ __ \r\n |  ___/| '_ \\ / _ \\| __/ _ \\\\___ \\ / _ \\| '__| __/ _ \\ '__|\r\n | |    | | | | (_) | || (_) |___) | (_) | |  | ||  __/ |   \r\n |_|    |_| |_|\\___/ \\__\\___/_____/ \\___/|_|   \\__\\___|_|   ");
 
         if (commandLine.hasOption("w")) {
             this.write = true;
-            System.out.println("'-w' specified. Changes are written...");
+            System.out.println("'\n-w' specified. Changes are written...");
         } else {
-            System.out.println("\nPhotoSorter starting in dry-run mode. No changes written. \nIf you want to write changes add '-w' as an option.\nUse '-h' for help.\n");
+            System.out.println("\nPhotoSorter starting in dry-run mode. No changes written. \nIf you want to write changes add '-w' as an option.\nUse '-h' for help.");
         }
+
+        System.out.println("Using timezone " + timeZone.getID() + ".\n\n");
 
 
     }
 
     Date getDateFromExif(Path photo) throws ImageProcessingException, IOException {
+        //TODO we do not need "Europe" here any longer
         Metadata metadata = ImageMetadataReader.readMetadata(photo.toFile());
 
         // obtain the Exif directory
         ExifSubIFDDirectory directory
                 = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
-        //TODO make timezone configurable
 // query the tag's value
         Date date
-                = directory.getDate(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL, TimeZone.getTimeZone("Europe/Berlin"));
+                = directory.getDate(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL, this.timeZone);
 
         SimpleDateFormat sdfEurope = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        sdfEurope.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
+        sdfEurope.setTimeZone(this.timeZone);
         String sDateinEurope = sdfEurope.format(date);
         return date;
         //System.out.println(sDateinEurope);
@@ -118,12 +123,11 @@ public class PhotoSorter {
             return fileBase;
 
         } else {
-            //TODO better error handling here.
             return null;
         }
     }
 
-    private String getFileExt(String fileName) {
+   /* private String getFileExt(String fileName) {
         String[] tokens = fileName.split("\\.(?=[^\\.]+$)");
         //LOGGER.info(Arrays.toString(tokens));
         if (tokens.length > 0) {
@@ -133,50 +137,53 @@ public class PhotoSorter {
             return fileExt;
 
         } else {
-            //TODO better error handling here.
             return null;
         }
-    }
+    }*/
 
 
-    private boolean moveRelevantFiles(String targetParent, PhotoFile photoFile) throws IOException {
+    private void moveRelevantFiles(String targetParent, PhotoFile photoFile) throws IOException {
         //TODO is this all safe?
         List<String> list = photoFile.getSupportedMetaDataFileExtensions();
         //Move original file
         Path targetPath = Paths.get(targetParent + File.separator + photoFile.getFilePath().getFileName());
-        if (this.write) {
-            System.out.println("Moving to " + targetPath);
-            System.out.println("##### " + photoFile.getFilePath());
-            Files.move((photoFile.getFilePath()), targetPath);
-        } else {
-            System.out.println("Would move to " + targetPath);
-        }
 
-        //Move metadata files
-        for (String ext :
-                list) {
-            String tmpFileBase = getFileBase(photoFile.getFilePath().getFileName().toString());
+        if (targetPath != null) {
+            if (this.write) {
+                System.out.println("Moving to " + targetPath);
+                System.out.println("##### " + photoFile.getFilePath());
+                Files.move((photoFile.getFilePath()), targetPath);
+            } else {
+                System.out.println("Would move to " + targetPath);
+            }
 
-            if (tmpFileBase != null) {
-                File movableFile = new File(photoFile.getFilePath().getParent().toString() + File.separator + tmpFileBase + "." + ext);
-                if (movableFile.exists()) {
-                    targetPath = Paths.get(targetParent + File.separator + movableFile.getName());
-                    if (this.write) {
-                        System.out.println("Moving meta file to " + targetPath);
-                        Files.move((movableFile.toPath()), targetPath);
-                    } else {
-                        System.out.println("Would move meta file to " + targetPath);
+            //Move metadata files
+            for (String ext :
+                    list) {
+                String tmpFileBase = getFileBase(photoFile.getFilePath().getFileName().toString());
+
+                if (tmpFileBase != null) {
+                    File movableFile = new File(photoFile.getFilePath().getParent().toString() + File.separator + tmpFileBase + "." + ext);
+                    if (movableFile.exists()) {
+                        targetPath = Paths.get(targetParent + File.separator + movableFile.getName());
+                        if (this.write) {
+                            System.out.println("Moving meta file to " + targetPath);
+                            Files.move((movableFile.toPath()), targetPath);
+                        } else {
+                            System.out.println("Would move meta file to " + targetPath);
+                        }
                     }
+                } else {
+                    System.out.println("Filebase of " + photoFile.getFilePath().getFileName().toString() + " could not be determined. Skipping...");
                 }
             }
         }
 
-        return true;
     }
 
     public void movePhotoToEvent(PhotoFile photoFile, Date eventStartDate) throws IOException {
         SimpleDateFormat sdfEurope = new SimpleDateFormat(this.dateFormatFolders);
-        sdfEurope.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
+        sdfEurope.setTimeZone(this.timeZone);
         String sDateinEurope = sdfEurope.format(eventStartDate) + this.eventFileSuffix;
 
         String eventPath = this.photosPath + File.separator + sDateinEurope;
@@ -226,7 +233,7 @@ public class PhotoSorter {
 
     private PhotoEvent handleEvent(Date dateOld, Date dateNew) throws IOException {
         SimpleDateFormat sdfEurope = new SimpleDateFormat(this.dateFormatFolders);
-        sdfEurope.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
+        sdfEurope.setTimeZone(this.timeZone);
         String sDateinEurope = sdfEurope.format(this.eventStartDate) + this.eventFileSuffix;
         System.out.println(sDateinEurope + " would be created as an event folder.");
         File eventFile = new File(this.photosPath + File.separator + sDateinEurope);
@@ -249,8 +256,6 @@ public class PhotoSorter {
     List<PhotoFile> listSourceFiles() throws IOException, ImageProcessingException, ParseException {
         List<PhotoFile> result = new ArrayList<>();
         Date date = null;
-        //TODO add other raw file extensions and make them configurable
-        //png,PNG,jpg,JPG,xmp,XMP
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(this.photosPath, "*.*")) {
             for (Path entry : stream) {
                 PhotoFile photoFile;
@@ -262,10 +267,13 @@ public class PhotoSorter {
 
                     date = getDateFromExif(entry);
                 }
-                //TODO error handling if date is null
-                photoFile = new PhotoFile(entry, date);
+                if (date != null) {
+                    photoFile = new PhotoFile(entry, date);
 
-                result.add(photoFile);
+                    result.add(photoFile);
+                } else {
+                    System.out.println("Date of " + entry.getFileName() + " could not be determined. Skipping...");
+                }
             }
         } catch (DirectoryIteratorException ex) {
             // I/O error encounted during the iteration, the cause is an IOException
