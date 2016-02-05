@@ -12,7 +12,7 @@ Commandline<br/>
 <h2>Starting Photosorter</h2>
 Zip and tar distribution files with all necessary files can be found in build/distributions. An already extracted distribution can be found in build/install with a batch / sh file below bin/.
 
-<h2>Photosorter comman line arguments:<h2>
+<h2>Photosorter command line arguments:</h2>
 All arguments are optional and contain sensible defaults.
 
 <pre>usage: PhotoSorter
@@ -219,7 +219,7 @@ Executable then can be found below 'build/install/photosorter/bin'
 2014-12-28T1936_06465.jpg
 </pre>
 
-<h3>After (Folders have the starting date of the first photo and contain respecting files):</h2>
+<h3>After (Folders have the starting date of the first photo and contain respecting files):</h3>
 <pre>
 2014-12-01-NEW_EVENT
 2014-12-21-NEW_EVENT
