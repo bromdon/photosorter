@@ -3,4 +3,8 @@
 /.idea/workspace.xml
 .DS_Store
 out
-build
+build/classes
+build/dependency-cache
+build/libs
+build/scripts
+build/tmp

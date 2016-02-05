@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="da9ce77e-6e6e-4ea2-adc4-28e1dea81a64" name="Default" comment="Checking Todos and minor cleanup">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/outputFileStates.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/cache.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/cache.properties.lock" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/fileHashes.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/fileSnapshots.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/outputFileStates.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/taskArtifacts.bin" afterPath="" />
+    <list default="true" id="da9ce77e-6e6e-4ea2-adc4-28e1dea81a64" name="Default" comment="Git optimizations">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/photosorter.iws" afterPath="$PROJECT_DIR$/photosorter.iws" />
     </list>
@@ -105,8 +93,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.12328767">
-              <caret line="6" column="35" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.1849315">
+              <caret line="9" column="9" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -1331,7 +1319,7 @@
       <workItem from="1454701617464" duration="77000" />
       <workItem from="1454701792260" duration="1049000" />
       <workItem from="1454702864416" duration="6134000" />
-      <workItem from="1454709851251" duration="187000" />
+      <workItem from="1454709851251" duration="352000" />
     </task>
     <task id="LOCAL-00001" summary="Works with exif but cleanup still missing">
       <created>1451864008544</created>
@@ -1363,7 +1351,13 @@
       <option name="project" value="LOCAL" />
       <updated>1454708765685</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Git optimizations">
+      <created>1454710066266</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1454710066266</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1375,7 +1369,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57193000" />
+    <option name="totallyTimeSpent" value="57358000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1392,6 +1386,7 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1410,7 +1405,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25759578" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Run with VisualVM" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1437,7 +1431,8 @@
     <MESSAGE value="First working draft based on only exif information." />
     <MESSAGE value="Checked todos and very little polishing" />
     <MESSAGE value="Checking Todos and minor cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="Checking Todos and minor cleanup" />
+    <MESSAGE value="Git optimizations" />
+    <option name="LAST_COMMIT_MESSAGE" value="Git optimizations" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1924,8 +1919,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12328767">
-          <caret line="6" column="35" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.1849315">
+          <caret line="9" column="9" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
           <folding />
         </state>
       </provider>
