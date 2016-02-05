@@ -4,14 +4,13 @@ It uses the EXIF information of the images and thus can handle all files with me
 JPG and most raw files are definitely supported. PNG and other images with meta information should work, too.
 
 <h2>Requirements:</h2>
-Java 8 or higher
-Windows or Unix/Linux
-Image files with Time meta information or same naming scheme as image files. (e.g. XMP).
-Commandline
+Java 8 or higher<br />
+Windows or Unix/Linux<br />
+Image files with Time meta information or same naming scheme as image files. (e.g. XMP).<br />
+Commandline<br/>
 
-<h2>Starting Photosorter</h2>:
-Zip and tar distribution files with all necessary files can be found in build/distributions. An already extracted
-distribution can be found in build/install with a batch / sh file below bin/.
+<h2>Starting Photosorter</h2>
+Zip and tar distribution files with all necessary files can be found in build/distributions. An already extracted distribution can be found in build/install with a batch / sh file below bin/.
 
 <h2>Building with gradle:</h2>
 'gradle buildNeeded installDist'
@@ -24,7 +23,7 @@ Executable then can be found below 'build/install/photosorter/bin'
 
 <h2>Examples:</h2>
 
-<h2>Before (files):</h2>
+<h3>Before (flat photo files in folder):</h3>
 <pre>
 2014-12-01T1451_06371.arw
 2014-12-01T1451_06371.jpg
@@ -202,7 +201,7 @@ Executable then can be found below 'build/install/photosorter/bin'
 2014-12-28T1936_06465.jpg
 </pre>
 
-<h2>After (Folders have the starting date of the first photo and contain respecting files):</h2>
+<h3>After (Folders have the starting date of the first photo and contain respecting files):</h2>
 <pre>
 2014-12-01-NEW_EVENT
 2014-12-21-NEW_EVENT
