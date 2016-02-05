@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da9ce77e-6e6e-4ea2-adc4-28e1dea81a64" name="Default" comment="Git optimizations">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/distributions/photosorter-1.0-SNAPSHOT.tar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/distributions/photosorter-1.0-SNAPSHOT.zip" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/install/photosorter/lib/commons-cli-1.3.1.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/install/photosorter/lib/metadata-extractor-2.8.1.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/install/photosorter/lib/photosorter-1.0-SNAPSHOT.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/install/photosorter/lib/tika-core-1.11.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/install/photosorter/lib/xmpcore-5.1.2.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/install/photosorter/bin/photosorter" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/install/photosorter/bin/photosorter.bat" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/photosorter.iws" afterPath="$PROJECT_DIR$/photosorter.iws" />
     </list>
     <ignored path="photosorter.iws" />
@@ -1319,7 +1327,7 @@
       <workItem from="1454701617464" duration="77000" />
       <workItem from="1454701792260" duration="1049000" />
       <workItem from="1454702864416" duration="6134000" />
-      <workItem from="1454709851251" duration="352000" />
+      <workItem from="1454709851251" duration="424000" />
     </task>
     <task id="LOCAL-00001" summary="Works with exif but cleanup still missing">
       <created>1451864008544</created>
@@ -1357,7 +1365,13 @@
       <option name="project" value="LOCAL" />
       <updated>1454710066266</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Git optimizations">
+      <created>1454710207803</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1454710207803</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1369,7 +1383,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57358000" />
+    <option name="totallyTimeSpent" value="57430000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
