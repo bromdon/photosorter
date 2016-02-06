@@ -4,10 +4,12 @@ It uses the EXIF information of the images and thus can handle all files with me
 JPG and most raw files are definitely supported. PNG and other images with meta information should work, too.
 
 <h2>Requirements:</h2>
-Java 8 or higher<br />
-Windows or Unix/Linux<br />
-Image files with Time meta information or same naming scheme as image files. (e.g. XMP).<br />
-Commandline<br/>
+<ul>
+<li>Java 8 or higher</li>
+<li>Windows or Unix/Linux</li>
+<li>Image files with Time meta information or same naming scheme as image files. (e.g. XMP).</li>
+<li>Commandline</li>
+</ul>
 
 <h2>Starting Photosorter</h2>
 Zip and tar distribution files with all necessary files can be found in build/distributions. An already extracted distribution can be found in build/install with a batch / sh file below bin/.
@@ -17,8 +19,6 @@ All arguments are optional and contain sensible defaults.
 
 <pre>usage: PhotoSorter
  -dfe <arg>           Java date format for event folders.
- -dsplitchar <arg>    This character splits the date string from the rest
-                      of the filename.
  -h,--help            Print this message.
  -minhours <arg>      A new event is assumed when more than these hours
                       have passed.
