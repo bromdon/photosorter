@@ -94,6 +94,38 @@
  *     Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
  */
 
+/*
+ *     This file is part of photosorter.
+ *
+ *     photosorter is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     photosorter is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *     Diese Datei ist Teil von photosorter.
+ *
+ *     photosorter ist Freie Software: Sie können es unter den Bedingungen
+ *     der GNU General Public License, wie von der Free Software Foundation,
+ *     Version 3 der Lizenz oder (nach Ihrer Wahl) jeder späteren
+ *     veröffentlichten Version, weiterverbreiten und/oder modifizieren.
+ *
+ *     photosorter wird in der Hoffnung, dass es nützlich sein wird, aber
+ *     OHNE JEDE GEWÄHRLEISTUNG, bereitgestellt; sogar ohne die implizite
+ *     Gewährleistung der MARKTFÄHIGKEIT oder EIGNUNG FÜR EINEN BESTIMMTEN ZWECK.
+ *     Siehe die GNU General Public License für weitere Details.
+ *
+ *     Sie sollten eine Kopie der GNU General Public License zusammen mit diesem
+ *     Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
+ */
+
 package de.phillme;
 
 import com.drew.imaging.ImageMetadataReader;
@@ -127,13 +159,13 @@ public class PhotoSorter {
 
     private int hoursBetweenEvents = 36;
 
-    private String eventFileSuffix = "-NEW_EVENT";
+    private String eventFileSuffix = "";
 
     private String dateFormatPhotos = "";
     private String dateFormatFolders = "";
 
 
-    private String splitBetweenDateAndRest = "";
+    //private String splitBetweenDateAndRest = "";
 
     private Path photosPath = null;
 
@@ -153,7 +185,7 @@ public class PhotoSorter {
         this.hoursBetweenEvents = Integer.parseInt(commandLine.getOptionValue("minhours", "36"));
         this.dateFormatPhotos = commandLine.getOptionValue("dfp", "yyyy-MM-dd'T'HHmm");
         this.dateFormatFolders = commandLine.getOptionValue("dfe", "yyyy-MM-dd");
-        this.splitBetweenDateAndRest = commandLine.getOptionValue("dsplitchar", "_");
+        //this.splitBetweenDateAndRest = commandLine.getOptionValue("dsplitchar", "_");
         this.photosPath = Paths.get(commandLine.getOptionValue("p", "."));
         this.timeZone = TimeZone.getTimeZone(commandLine.getOptionValue("timezone", Calendar.getInstance().getTimeZone().getID()));
 
@@ -197,7 +229,7 @@ public class PhotoSorter {
         LOGGER.finest(photoFile.getFilePath().toString());
     }
 
-    private Date parseDateFromFileName(String fileName) throws ParseException {
+   /* private Date parseDateFromFileName(String fileName) throws ParseException {
         String string = "2015-01-05T2254_06470.arw";
         String[] split = fileName.split(this.splitBetweenDateAndRest);
 
@@ -206,7 +238,7 @@ public class PhotoSorter {
         LOGGER.finest("DATE " + date.toString());
 
         return date;
-    }
+    }     */
 
     private String getFileBase(String fileName) {
         String[] tokens = fileName.split("\\.(?=[^\\.]+$)");

@@ -203,8 +203,8 @@ Executable then can be found below 'build/install/photosorter/bin'
 
 <h3>After (Folders have the starting date of the first photo and contain respecting files):</h2>
 <pre>
-2014-12-01-NEW_EVENT
-2014-12-21-NEW_EVENT
-2014-12-24-NEW_EVENT
-2014-12-28-NEW_EVENT
+2014-12-01
+2014-12-21
+2014-12-24
+2014-12-28
 </pre>
