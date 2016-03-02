@@ -11,8 +11,28 @@ JPG and most raw files are definitely supported. PNG and other images with meta 
 <li>Commandline</li>
 </ul>
 
-<h2>Starting Photosorter</h2>
-Zip and tar distribution files with all necessary files can be found in build/distributions. An already extracted distribution can be found in build/install with a batch / sh file below bin/.
+<h2>Installing Photosorter</h2>
+Zip and tar distribution files with all necessary files can be found in https://github.com/bromdon/photosorter/tree/master/build/distributions.
+<ol>
+<li>Download zip or tar file from https://github.com/bromdon/photosorter/tree/master/build/distributions</li>
+<li>Extract archives to a directory</li>
+<li>You will then have a structure like this
+<pre>
+photosorter-1.0-SNAPSHOT
+├── bin
+│   ├── photosorter
+│   └── photosorter.bat
+└── lib
+    ├── commons-cli-1.3.1.jar
+    ├── metadata-extractor-2.8.1.jar
+    ├── photosorter-1.0-SNAPSHOT.jar
+    ├── tika-core-1.11.jar
+    └── xmpcore-5.1.2.jar
+</pre>
+</li>
+<li>Under Windows just run photosorter.bat in the bin/ directory. In Linux just execute bin/photosorter.</li>
+<li>Photosorter assumes the current folder as a default. Pass '-- help' as an argument to see the help which is also shown below.
+</ol>
 
 <h2>Photosorter command line arguments:</h2>
 All arguments are optional and contain sensible defaults.
