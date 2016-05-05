@@ -1,53 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="da9ce77e-6e6e-4ea2-adc4-28e1dea81a64" name="Default" comment="Minor bugfix which could lead to a NPE when an image without exif is used.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/distributions/photosorter-1.0-SNAPSHOT/lib/commons-cli-1.3.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/distributions/photosorter-1.0-SNAPSHOT/lib/metadata-extractor-2.8.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/distributions/photosorter-1.0-SNAPSHOT/lib/photosorter-1.0-SNAPSHOT.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/distributions/photosorter-1.0-SNAPSHOT/lib/tika-core-1.11.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/distributions/photosorter-1.0-SNAPSHOT/lib/xmpcore-5.1.2.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/resources/test/img/2014-12-01T1451_06371.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/resources/test/img/2014-12-01T1516_06382.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/resources/test/img/2014-12-24T1938_06411.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/resources/test/img/2014-12-24T1939_06412.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/resources/test/img/2016-04-30T1115_00387.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/test-results/binary/test/output.bin" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/test-results/binary/test/output.bin.idx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/test-results/binary/test/results.bin" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/distributions/photosorter-1.0-SNAPSHOT/bin/photosorter" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/distributions/photosorter-1.0-SNAPSHOT/bin/photosorter.bat" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/reports/tests/classes/de.phillme.PhotoSorterTest.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/reports/tests/css/base-style.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/reports/tests/css/style.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/reports/tests/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/reports/tests/js/report.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/reports/tests/packages/de.phillme.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/resources/test/img/2014-12-01T1516_06382.jpg.xmp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/resources/test/img/2014-12-24T1938_06411.jpg.xmp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/resources/test/img/2014-12-24T1939_06412.jpg.xmp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/resources/test/img/2016-04-30T1115_00387.jpg.xmp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/test-results/TEST-de.phillme.PhotoSorterTest.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/outputFileStates.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/cache.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/cache.properties.lock" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/fileHashes.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/fileSnapshots.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/outputFileStates.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/taskArtifacts.bin" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/distributions/photosorter-1.0-SNAPSHOT.tar" afterPath="$PROJECT_DIR$/build/distributions/photosorter-1.0-SNAPSHOT.tar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/distributions/photosorter-1.0-SNAPSHOT.zip" afterPath="$PROJECT_DIR$/build/distributions/photosorter-1.0-SNAPSHOT.zip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/install/photosorter/lib/photosorter-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/build/install/photosorter/lib/photosorter-1.0-SNAPSHOT.jar" />
+    <list default="true" id="da9ce77e-6e6e-4ea2-adc4-28e1dea81a64" name="Default" comment="Several improvements:&#10;- Renaming of images based on the exif date can now be done.&#10;- Format for renaming can be set by a cmd parameter.&#10;- Renaming can be deactivated by a parameter.&#10;- Current configuration options are print out at the beginning.">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/resources/img/2014-12-01T1451_06371.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/resources/img/2014-12-01T1516_06382.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/resources/img/2014-12-01T1516_06382.jpg.xmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/resources/img/2014-12-24T1938_06411.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/resources/img/2014-12-24T1938_06411.jpg.xmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/resources/img/2014-12-24T1939_06412.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/resources/img/2014-12-24T1939_06412.jpg.xmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/resources/img/2016-04-30T1115_00387.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/resources/img/2016-04-30T1115_00387.jpg.xmp" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/photosorter.iws" afterPath="$PROJECT_DIR$/photosorter.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/phillme/PhotoConfig.java" afterPath="$PROJECT_DIR$/src/main/java/de/phillme/PhotoConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/phillme/PhotoEvent.java" afterPath="$PROJECT_DIR$/src/main/java/de/phillme/PhotoEvent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/phillme/PhotoExtension.java" afterPath="$PROJECT_DIR$/src/main/java/de/phillme/PhotoExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/phillme/PhotoFile.java" afterPath="$PROJECT_DIR$/src/main/java/de/phillme/PhotoFile.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/phillme/PhotoSorter.java" afterPath="$PROJECT_DIR$/src/main/java/de/phillme/PhotoSorter.java" />
     </list>
     <ignored path="photosorter.iws" />
@@ -80,32 +45,7 @@
           <activation />
         </task>
         <projects_view>
-          <tree_state>
-            <PATH>
-              <PATH_ELEMENT>
-                <option name="myItemId" value="" />
-                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ExternalProjectsStructure$RootNode" />
-              </PATH_ELEMENT>
-              <PATH_ELEMENT>
-                <option name="myItemId" value="photosorter" />
-                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ProjectNode" />
-              </PATH_ELEMENT>
-              <PATH_ELEMENT>
-                <option name="myItemId" value="Run Configurations" />
-                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.RunConfigurationsNode" />
-              </PATH_ELEMENT>
-            </PATH>
-            <PATH>
-              <PATH_ELEMENT>
-                <option name="myItemId" value="" />
-                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ExternalProjectsStructure$RootNode" />
-              </PATH_ELEMENT>
-              <PATH_ELEMENT>
-                <option name="myItemId" value="photosorter" />
-                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ProjectNode" />
-              </PATH_ELEMENT>
-            </PATH>
-          </tree_state>
+          <tree_state />
         </projects_view>
       </state>
     </system>
@@ -115,95 +55,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="PhotoSorter.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PhotoSorter.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoSorter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="261" column="23" selection-start-line="261" selection-start-column="23" selection-end-line="261" selection-end-column="23" />
+            <state relative-caret-position="151">
+              <caret line="232" column="19" selection-start-line="232" selection-start-column="19" selection-end-line="232" selection-end-column="19" />
               <folding>
-                <element signature="e#0#17950#0" expanded="true" />
+                <element signature="e#0#19634#0" expanded="true" />
                 <element signature="imports" expanded="true" />
+                <element signature="e#18131#18132#0" expanded="true" />
+                <element signature="e#18163#18164#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
-            <state split_layout="FIRST">
-              <first_editor relative-caret-position="705">
-                <caret line="47" column="16" selection-start-line="47" selection-start-column="16" selection-end-line="47" selection-end-column="16" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PhotoFile.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoFile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
-              <folding>
-                <element signature="e#3942#3943#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PhotoConfig.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PhotoConfig.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
-              <caret line="128" column="19" selection-start-line="128" selection-start-column="19" selection-end-line="128" selection-end-column="19" />
+            <state relative-caret-position="551">
+              <caret line="170" column="4" selection-start-line="170" selection-start-column="4" selection-end-line="170" selection-end-column="4" />
               <folding>
+                <element signature="e#0#8272#0" expanded="true" />
                 <element signature="imports" expanded="true" />
+                <element signature="e#8153#8154#0" expanded="true" />
+                <element signature="e#8183#8184#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="68" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PhotoEvent.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoEvent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="111" column="18" selection-start-line="111" selection-start-column="18" selection-end-line="111" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="settings.gradle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/settings.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PhotoExtension.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoExtension.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="71" column="72" selection-start-line="71" selection-start-column="72" selection-end-line="71" selection-end-column="72" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -579,9 +456,9 @@
         <option value="$PROJECT_DIR$/src/main/java/de/phillme/PhotoFile.java" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/test/java/de/phillme/PhotoSorterTest.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/main/java/de/phillme/PhotoConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/phillme/PhotoSorter.java" />
-        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -788,7 +665,7 @@
       <recent name="$PROJECT_DIR$/src/main/java" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.photosorter [buildNeeded_DIST]">
+  <component name="RunManager" selected="Application.PhotoSorter on testdata">
     <configuration default="false" name="PhotoSorter on testdata" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -798,7 +675,7 @@
       </extension>
       <option name="MAIN_CLASS_NAME" value="de.phillme.PhotoSorter" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="-w" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/src/test/resources/img" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -1327,8 +1204,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Gradle.photosorter [buildNeeded_DIST]" />
-        <item index="1" class="java.lang.String" itemvalue="Application.PhotoSorter on testdata" />
+        <item index="0" class="java.lang.String" itemvalue="Application.PhotoSorter on testdata" />
+        <item index="1" class="java.lang.String" itemvalue="Gradle.photosorter [buildNeeded_DIST]" />
         <item index="2" class="java.lang.String" itemvalue="JUnit.&lt;default&gt; (1)" />
         <item index="3" class="java.lang.String" itemvalue="JUnit.&lt;default&gt;" />
         <item index="4" class="java.lang.String" itemvalue="Gradle.photosorter [buildDependents]" />
@@ -1366,7 +1243,7 @@
       <workItem from="1459970756772" duration="1694000" />
       <workItem from="1462389004112" duration="42000" />
       <workItem from="1462389063855" duration="15682000" />
-      <workItem from="1462457426826" duration="351000" />
+      <workItem from="1462457426826" duration="7803000" />
     </task>
     <task id="LOCAL-00001" summary="Works with exif but cleanup still missing">
       <created>1451864008544</created>
@@ -1459,7 +1336,14 @@
       <option name="project" value="LOCAL" />
       <updated>1459971201623</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="cleanup">
+      <created>1462457818392</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1462457818392</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1471,9 +1355,9 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80020000" />
+    <option name="totallyTimeSpent" value="87472000" />
   </component>
-  <component name="TodoView">
+  <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
     </todo-panel>
@@ -1487,33 +1371,33 @@
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32849604" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32849604" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15567282" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="false" show_stripe_button="true" weight="0.5963061" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="563" y="169" width="468" height="481" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="true" show_stripe_button="true" weight="1.0" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="-3" y="-4" width="1606" height="879" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32938075" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19768934" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run with VisualVM" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15019256" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24967907" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32849604" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15019256" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24967907" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26781002" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23087071" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug with VisualVM" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32849604" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37467018" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32849604" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="UpdateCopyrightCheckinHandler">
@@ -1539,7 +1423,9 @@
     <MESSAGE value="Updated Readme" />
     <MESSAGE value="Minor cleanup" />
     <MESSAGE value="Minor bugfix which could lead to a NPE when an image without exif is used." />
-    <option name="LAST_COMMIT_MESSAGE" value="Minor bugfix which could lead to a NPE when an image without exif is used." />
+    <MESSAGE value="cleanup" />
+    <MESSAGE value="Several improvements:&#10;- Renaming of images based on the exif date can now be done.&#10;- Format for renaming can be set by a cmd parameter.&#10;- Renaming can be deactivated by a parameter.&#10;- Current configuration options are print out at the beginning." />
+    <option name="LAST_COMMIT_MESSAGE" value="Several improvements:&#10;- Renaming of images based on the exif date can now be done.&#10;- Format for renaming can be set by a cmd parameter.&#10;- Renaming can be deactivated by a parameter.&#10;- Current configuration options are print out at the beginning." />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1547,12 +1433,18 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoSorter.java</url>
-          <line>212</line>
+          <line>257</line>
           <properties />
           <option name="timeStamp" value="16" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoSorter.java</url>
+          <line>155</line>
+          <properties />
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="17" />
+      <option name="time" value="18" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1574,8 +1466,10 @@
         <state relative-caret-position="0">
           <caret line="90" column="18" selection-start-line="90" selection-start-column="17" selection-end-line="90" selection-end-column="18" />
           <folding>
-            <element signature="e#0#17950#0" expanded="true" />
+            <element signature="e#0#19634#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#18131#18132#0" expanded="true" />
+            <element signature="e#18163#18164#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1585,7 +1479,7 @@
         <state relative-caret-position="0">
           <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
           <folding>
-            <element signature="e#3942#3943#0" expanded="true" />
+            <element signature="e#5478#5479#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1596,7 +1490,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#0#8272#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#8153#8154#0" expanded="true" />
+            <element signature="e#8183#8184#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1638,8 +1535,10 @@
         <state relative-caret-position="0">
           <caret line="90" column="18" selection-start-line="90" selection-start-column="17" selection-end-line="90" selection-end-column="18" />
           <folding>
-            <element signature="e#0#17950#0" expanded="true" />
+            <element signature="e#0#19634#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#18131#18132#0" expanded="true" />
+            <element signature="e#18163#18164#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1649,7 +1548,7 @@
         <state relative-caret-position="0">
           <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
           <folding>
-            <element signature="e#3942#3943#0" expanded="true" />
+            <element signature="e#5478#5479#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1660,7 +1559,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#0#8272#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#8153#8154#0" expanded="true" />
+            <element signature="e#8183#8184#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1702,8 +1604,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#17950#0" expanded="true" />
+            <element signature="e#0#19634#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#18131#18132#0" expanded="true" />
+            <element signature="e#18163#18164#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1713,7 +1617,7 @@
         <state relative-caret-position="0">
           <caret line="21" column="46" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
           <folding>
-            <element signature="e#3942#3943#0" expanded="true" />
+            <element signature="e#5478#5479#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1724,7 +1628,10 @@
         <state relative-caret-position="0">
           <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
           <folding>
+            <element signature="e#0#8272#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#8153#8154#0" expanded="true" />
+            <element signature="e#8183#8184#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1758,8 +1665,10 @@
         <state relative-caret-position="0">
           <caret line="277" column="32" selection-start-line="277" selection-start-column="32" selection-end-line="277" selection-end-column="32" />
           <folding>
-            <element signature="e#0#17950#0" expanded="true" />
+            <element signature="e#0#19634#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#18131#18132#0" expanded="true" />
+            <element signature="e#18163#18164#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1770,7 +1679,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#0#8272#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#8153#8154#0" expanded="true" />
+            <element signature="e#8183#8184#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1804,8 +1716,10 @@
         <state relative-caret-position="0">
           <caret line="277" column="32" selection-start-line="277" selection-start-column="32" selection-end-line="277" selection-end-column="32" />
           <folding>
-            <element signature="e#0#17950#0" expanded="true" />
+            <element signature="e#0#19634#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#18131#18132#0" expanded="true" />
+            <element signature="e#18163#18164#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1816,7 +1730,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#0#8272#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#8153#8154#0" expanded="true" />
+            <element signature="e#8183#8184#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1850,8 +1767,10 @@
         <state relative-caret-position="0">
           <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
           <folding>
-            <element signature="e#0#17950#0" expanded="true" />
+            <element signature="e#0#19634#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#18131#18132#0" expanded="true" />
+            <element signature="e#18163#18164#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1903,7 +1822,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoEvent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="555">
-          <caret line="111" column="18" selection-start-line="111" selection-start-column="18" selection-end-line="111" selection-end-column="18" />
+          <caret line="143" column="18" selection-start-line="143" selection-start-column="18" selection-end-line="143" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -1919,9 +1838,9 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoFile.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
-          <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+          <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
           <folding>
-            <element signature="e#3942#3943#0" expanded="true" />
+            <element signature="e#5478#5479#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1930,23 +1849,12 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoExtension.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
-          <caret line="71" column="72" selection-start-line="71" selection-start-column="72" selection-end-line="71" selection-end-column="72" />
+          <caret line="103" column="72" selection-start-line="103" selection-start-column="72" selection-end-line="103" selection-end-column="72" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoMover.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoSorter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="261" column="23" selection-start-line="261" selection-start-column="23" selection-end-line="261" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#17950#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -1957,10 +1865,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="128" column="19" selection-start-line="128" selection-start-column="19" selection-end-line="128" selection-end-column="19" />
+        <state relative-caret-position="551">
+          <caret line="170" column="4" selection-start-line="170" selection-start-column="4" selection-end-line="170" selection-end-column="4" />
           <folding>
+            <element signature="e#0#8272#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#8153#8154#0" expanded="true" />
+            <element signature="e#8183#8184#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/phillme/PhotoSorter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="232" column="19" selection-start-line="232" selection-start-column="19" selection-end-line="232" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#19634#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#18131#18132#0" expanded="true" />
+            <element signature="e#18163#18164#0" expanded="true" />
           </folding>
         </state>
       </provider>

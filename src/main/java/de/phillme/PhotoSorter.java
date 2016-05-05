@@ -1,5 +1,3 @@
-
-
 /*
  *     This file is part of photosorter.
  *
@@ -63,6 +61,7 @@
  *     Sie sollten eine Kopie der GNU General Public License zusammen mit diesem
  *     Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
  */
+
 
 package de.phillme;
 
@@ -79,7 +78,6 @@ import org.apache.tika.Tika;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -91,6 +89,7 @@ import java.util.logging.SimpleFormatter;
 class PhotoSorter {
 
 
+    private boolean noRename = false;
     private TimeZone timeZone;
     private Date dateOld;
     private Date eventStartDate;
@@ -102,6 +101,7 @@ class PhotoSorter {
 
     private String dateFormatPhotos = "";
     private String dateFormatFolders = "";
+    private int photoNumberInEvent = 1;
 
 
     //private String splitBetweenDateAndRest = "";
@@ -111,10 +111,9 @@ class PhotoSorter {
     private boolean write = false;
 
 
-    private List<PhotoEvent> eventList = new ArrayList<PhotoEvent>();
+    private List<PhotoEvent> eventList = new ArrayList<>();
 
     //TODO clean up and refactor make this more understandeable and mainteneable at some time
-    // assumes the current class is called logger
     private final static Logger LOGGER = Logger.getLogger(PhotoSorter.class.getName());
     private final Tika tika = new Tika();
 
@@ -124,9 +123,12 @@ class PhotoSorter {
         this.hoursBetweenEvents = Integer.parseInt(commandLine.getOptionValue("minhours", "36"));
         this.dateFormatPhotos = commandLine.getOptionValue("dfp", "yyyy-MM-dd'T'HHmm");
         this.dateFormatFolders = commandLine.getOptionValue("dfe", "yyyy-MM-dd");
+
         //this.splitBetweenDateAndRest = commandLine.getOptionValue("dsplitchar", "_");
         this.photosPath = Paths.get(commandLine.getOptionValue("p", "."));
         this.timeZone = TimeZone.getTimeZone(commandLine.getOptionValue("timezone", Calendar.getInstance().getTimeZone().getID()));
+
+        this.noRename = commandLine.hasOption("n");
 
         LOGGER.info("\r\n  _____  _           _        _____            _            \r\n |  __ \\| |         | |      / ____|          | |           \r\n | |__) | |__   ___ | |_ ___| (___   ___  _ __| |_ ___ _ __ \r\n |  ___/| '_ \\ / _ \\| __/ _ \\\\___ \\ / _ \\| '__| __/ _ \\ '__|\r\n | |    | | | | (_) | || (_) |___) | (_) | |  | ||  __/ |   \r\n |_|    |_| |_|\\___/ \\__\\___/_____/ \\___/|_|   \\__\\___|_|   ");
 
@@ -137,7 +139,15 @@ class PhotoSorter {
             LOGGER.info("\nPhotoSorter starting in dry-run mode. No changes written. \nIf you want to write changes add '-w' as an option.\n\nUse '-h' for help.");
         }
 
-        LOGGER.info("Using timezone " + timeZone.getID() + ".\n");
+        LOGGER.info("Using timezone " + timeZone.getID() + ".");
+        LOGGER.info("Using \"" + this.dateFormatFolders + "\" as a date format for folders.");
+
+        if (this.noRename) {
+            LOGGER.info("No-rename set. Photos will NOT be renamed.");
+        } else {
+            LOGGER.info("Using \"" + this.dateFormatPhotos + "\" as a date format for photos. Photos will be renamed.");
+        }
+        LOGGER.info("");
 
 
     }
@@ -154,21 +164,28 @@ class PhotoSorter {
     }
 
     private Date getDateFromExif(Path photo) throws ImageProcessingException, IOException {
-        //TODO we do not need "Europe" here any longer
         Metadata metadata = ImageMetadataReader.readMetadata(photo.toFile());
 
         // obtain the Exif directory
-        ExifSubIFDDirectory directory
+        ExifSubIFDDirectory edirectory
                 = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
 // query the tag's value
         Date date
-                = directory.getDate(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL, this.timeZone);
+                = edirectory.getDate(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL, this.timeZone);
 
-        SimpleDateFormat sdfEurope = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        sdfEurope.setTimeZone(this.timeZone);
-        //String sDateinEurope = sdfEurope.format(date);
+        /*for (Directory directory : metadata.getDirectories()) {
+            for (Tag tag : directory.getTags()) {
+                System.out.format("[%s] - %s = %s\n",
+                        directory.getName(), tag.getTagName(), tag.getDescription());
+            }
+            if (directory.hasErrors()) {
+                for (String error : directory.getErrors()) {
+                    System.err.format("ERROR: %s", error);
+                }
+            }
+        }*/
+
         return date;
-        //LOGGER.info(sDateinEurope);
     }
 
     private void parseFile(PhotoFile photoFile, boolean lastFile) throws IOException {
@@ -190,6 +207,24 @@ class PhotoSorter {
         return date;
     }     */
 
+    private String generateNewFileName(PhotoFile photoFile) {
+        if (photoFile.getPhotoDate() != null) {
+
+            SimpleDateFormat sdf = new SimpleDateFormat(this.dateFormatPhotos);
+            sdf.setTimeZone(this.timeZone);
+
+            String newFileName = sdf.format(photoFile.getPhotoDate()) + "_" + this.photoNumberInEvent;
+            String fileExt = getFileExt(photoFile.getFilePath().getFileName().toString());
+
+            if (fileExt != null) {
+                newFileName = newFileName + "." + fileExt;
+                return newFileName;
+            }
+        }
+
+        return null;
+    }
+
     private String getFileBase(String fileName) {
         String[] tokens = fileName.split("\\.(?=[^\\.]+$)");
         //LOGGER.finest(Arrays.toString(tokens));
@@ -205,26 +240,36 @@ class PhotoSorter {
         }
     }
 
-   /* private String getFileExt(String fileName) {
+    private String getFileExt(String fileName) {
         String[] tokens = fileName.split("\\.(?=[^\\.]+$)");
         //LOGGER.info(Arrays.toString(tokens));
         if (tokens.length > 0) {
             String fileExt = "";
             fileExt += tokens[tokens.length - 1];
-            LOGGER.info("File ext is " + fileExt);
+            LOGGER.finest("File ext is " + fileExt);
             return fileExt;
 
         } else {
             return null;
         }
-    }*/
+    }
 
 
     private void moveRelevantFiles(String targetParent, PhotoFile photoFile) throws IOException {
         //TODO is this all safe?
         List<String> list = photoFile.getSupportedMetaDataFileExtensions();
         //Move original file
-        Path targetPath = Paths.get(targetParent + File.separator + photoFile.getFilePath().getFileName());
+        String fileName = photoFile.getFilePath().getFileName().toString();
+
+
+        if (!this.noRename) {
+            //use the date provided for the photo files as a new name
+            String newFileName = generateNewFileName(photoFile);
+            if (newFileName != null) {
+                fileName = newFileName;
+            }
+        }
+        Path targetPath = Paths.get(targetParent + File.separator + fileName);
 
         if (targetPath != null) {
             if (this.write) {
@@ -242,10 +287,10 @@ class PhotoSorter {
                  */
                 String tmpFileBase = photoFile.getFilePath().getFileName().toString();
 
-                if (tmpFileBase != null) {
+                if (fileName != null && tmpFileBase != null) {
                     File movableFile = new File(photoFile.getFilePath().getParent().toString() + File.separator + tmpFileBase + "." + ext);
                     if (movableFile.exists()) {
-                        targetPath = Paths.get(targetParent + File.separator + movableFile.getName());
+                        targetPath = Paths.get(targetParent + File.separator + fileName + "." + ext);
                         if (this.write) {
                             LOGGER.info("Moving meta file to " + targetPath);
                             Files.move((movableFile.toPath()), targetPath);
@@ -297,6 +342,9 @@ class PhotoSorter {
             this.eventList.add(handleEvent());
 
             this.eventStartDate = dateNew;
+
+            this.photoNumberInEvent++;
+
             if (lastFile) {
                 //this is the last file. This means the last file's time range triggered an end of another event
                 //but should be an event by itself in the event list. This is what we do here
@@ -308,6 +356,8 @@ class PhotoSorter {
             //after the new startDate for the event is set we can move the file to the new event folder
             movePhotoToEvent(photoFile, this.eventStartDate);
         } else {
+            //increase photo number for filenames;
+            this.photoNumberInEvent++;
             //move all files to current event
             movePhotoToEvent(photoFile, this.eventStartDate);
 
