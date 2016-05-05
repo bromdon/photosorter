@@ -1,98 +1,4 @@
-/*
- *     This file is part of photosorter.
- *
- *     photosorter is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
- *
- *     photosorter is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
- *
- *     You should have received a copy of the GNU General Public License
- *     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
- *
- *     Diese Datei ist Teil von photosorter.
- *
- *     photosorter ist Freie Software: Sie können es unter den Bedingungen
- *     der GNU General Public License, wie von der Free Software Foundation,
- *     Version 3 der Lizenz oder (nach Ihrer Wahl) jeder späteren
- *     veröffentlichten Version, weiterverbreiten und/oder modifizieren.
- *
- *     photosorter wird in der Hoffnung, dass es nützlich sein wird, aber
- *     OHNE JEDE GEWÄHRLEISTUNG, bereitgestellt; sogar ohne die implizite
- *     Gewährleistung der MARKTFÄHIGKEIT oder EIGNUNG FÜR EINEN BESTIMMTEN ZWECK.
- *     Siehe die GNU General Public License für weitere Details.
- *
- *     Sie sollten eine Kopie der GNU General Public License zusammen mit diesem
- *     Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
- */
 
-/*
- *     This file is part of photosorter.
- *
- *     photosorter is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
- *
- *     photosorter is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
- *
- *     You should have received a copy of the GNU General Public License
- *     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
- *
- *     Diese Datei ist Teil von photosorter.
- *
- *     photosorter ist Freie Software: Sie können es unter den Bedingungen
- *     der GNU General Public License, wie von der Free Software Foundation,
- *     Version 3 der Lizenz oder (nach Ihrer Wahl) jeder späteren
- *     veröffentlichten Version, weiterverbreiten und/oder modifizieren.
- *
- *     photosorter wird in der Hoffnung, dass es nützlich sein wird, aber
- *     OHNE JEDE GEWÄHRLEISTUNG, bereitgestellt; sogar ohne die implizite
- *     Gewährleistung der MARKTFÄHIGKEIT oder EIGNUNG FÜR EINEN BESTIMMTEN ZWECK.
- *     Siehe die GNU General Public License für weitere Details.
- *
- *     Sie sollten eine Kopie der GNU General Public License zusammen mit diesem
- *     Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
- */
-
-/*
- *     This file is part of photosorter.
- *
- *     photosorter is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
- *
- *     photosorter is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
- *
- *     You should have received a copy of the GNU General Public License
- *     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
- *
- *     Diese Datei ist Teil von photosorter.
- *
- *     photosorter ist Freie Software: Sie können es unter den Bedingungen
- *     der GNU General Public License, wie von der Free Software Foundation,
- *     Version 3 der Lizenz oder (nach Ihrer Wahl) jeder späteren
- *     veröffentlichten Version, weiterverbreiten und/oder modifizieren.
- *
- *     photosorter wird in der Hoffnung, dass es nützlich sein wird, aber
- *     OHNE JEDE GEWÄHRLEISTUNG, bereitgestellt; sogar ohne die implizite
- *     Gewährleistung der MARKTFÄHIGKEIT oder EIGNUNG FÜR EINEN BESTIMMTEN ZWECK.
- *     Siehe die GNU General Public License für weitere Details.
- *
- *     Sie sollten eine Kopie der GNU General Public License zusammen mit diesem
- *     Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
- */
 
 /*
  *     This file is part of photosorter.
@@ -173,15 +79,16 @@ import org.apache.tika.Tika;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
-public class PhotoSorter {
+class PhotoSorter {
 
 
     private TimeZone timeZone;
@@ -206,13 +113,13 @@ public class PhotoSorter {
 
     private List<PhotoEvent> eventList = new ArrayList<PhotoEvent>();
 
-    //TODO clean up and refactor make this a bit more understandeable and mainteneable at some time
+    //TODO clean up and refactor make this more understandeable and mainteneable at some time
     // assumes the current class is called logger
     private final static Logger LOGGER = Logger.getLogger(PhotoSorter.class.getName());
     private final Tika tika = new Tika();
 
-    public PhotoSorter(CommandLine commandLine) {
-        LOGGER.setLevel(Level.INFO);
+    private PhotoSorter(CommandLine commandLine) {
+        initLogging();
 
         this.hoursBetweenEvents = Integer.parseInt(commandLine.getOptionValue("minhours", "36"));
         this.dateFormatPhotos = commandLine.getOptionValue("dfp", "yyyy-MM-dd'T'HHmm");
@@ -221,18 +128,29 @@ public class PhotoSorter {
         this.photosPath = Paths.get(commandLine.getOptionValue("p", "."));
         this.timeZone = TimeZone.getTimeZone(commandLine.getOptionValue("timezone", Calendar.getInstance().getTimeZone().getID()));
 
-        System.out.println("\r\n  _____  _           _        _____            _            \r\n |  __ \\| |         | |      / ____|          | |           \r\n | |__) | |__   ___ | |_ ___| (___   ___  _ __| |_ ___ _ __ \r\n |  ___/| '_ \\ / _ \\| __/ _ \\\\___ \\ / _ \\| '__| __/ _ \\ '__|\r\n | |    | | | | (_) | || (_) |___) | (_) | |  | ||  __/ |   \r\n |_|    |_| |_|\\___/ \\__\\___/_____/ \\___/|_|   \\__\\___|_|   ");
+        LOGGER.info("\r\n  _____  _           _        _____            _            \r\n |  __ \\| |         | |      / ____|          | |           \r\n | |__) | |__   ___ | |_ ___| (___   ___  _ __| |_ ___ _ __ \r\n |  ___/| '_ \\ / _ \\| __/ _ \\\\___ \\ / _ \\| '__| __/ _ \\ '__|\r\n | |    | | | | (_) | || (_) |___) | (_) | |  | ||  __/ |   \r\n |_|    |_| |_|\\___/ \\__\\___/_____/ \\___/|_|   \\__\\___|_|   ");
 
         if (commandLine.hasOption("w")) {
             this.write = true;
-            System.out.println("'\n-w' specified. Changes are written...");
+            LOGGER.info("'\n-w' specified. Changes are written...");
         } else {
-            System.out.println("\nPhotoSorter starting in dry-run mode. No changes written. \nIf you want to write changes add '-w' as an option.\nUse '-h' for help.");
+            LOGGER.info("\nPhotoSorter starting in dry-run mode. No changes written. \nIf you want to write changes add '-w' as an option.\n\nUse '-h' for help.");
         }
 
-        System.out.println("Using timezone " + timeZone.getID() + ".\n\n");
+        LOGGER.info("Using timezone " + timeZone.getID() + ".\n");
 
 
+    }
+
+
+    private void initLogging() {
+        System.setProperty("java.util.logging.SimpleFormatter.format", "%5$s %n");
+        LOGGER.setLevel(Level.INFO);
+        ConsoleHandler handler = new ConsoleHandler();
+        handler.setFormatter(new SimpleFormatter());
+        handler.setLevel(Level.INFO);
+        LOGGER.addHandler(handler);
+        LOGGER.setUseParentHandlers(false);
     }
 
     private Date getDateFromExif(Path photo) throws ImageProcessingException, IOException {
@@ -250,15 +168,15 @@ public class PhotoSorter {
         sdfEurope.setTimeZone(this.timeZone);
         //String sDateinEurope = sdfEurope.format(date);
         return date;
-        //System.out.println(sDateinEurope);
+        //LOGGER.info(sDateinEurope);
     }
 
-    private void parseFile(PhotoFile photoFile, boolean lastFile) throws ImageProcessingException, IOException, ParseException {
+    private void parseFile(PhotoFile photoFile, boolean lastFile) throws IOException {
 
         detectNewEvent(photoFile, this.dateOld, photoFile.getPhotoDate(), lastFile);
         this.dateOld = photoFile.getPhotoDate();
 
-        LOGGER.finest(photoFile.getFilePath().toString());
+        //LOGGER.finest(photoFile.getFilePath().toString());
     }
 
    /* private Date parseDateFromFileName(String fileName) throws ParseException {
@@ -274,7 +192,7 @@ public class PhotoSorter {
 
     private String getFileBase(String fileName) {
         String[] tokens = fileName.split("\\.(?=[^\\.]+$)");
-        //LOGGER.info(Arrays.toString(tokens));
+        //LOGGER.finest(Arrays.toString(tokens));
         if (tokens.length > 0) {
             String fileBase = "";
             for (int i = 0; i < (tokens.length - 1); i++) {
@@ -293,7 +211,7 @@ public class PhotoSorter {
         if (tokens.length > 0) {
             String fileExt = "";
             fileExt += tokens[tokens.length - 1];
-            System.out.println("File ext is " + fileExt);
+            LOGGER.info("File ext is " + fileExt);
             return fileExt;
 
         } else {
@@ -310,38 +228,40 @@ public class PhotoSorter {
 
         if (targetPath != null) {
             if (this.write) {
-                System.out.println("Moving to " + targetPath);
-                System.out.println("##### " + photoFile.getFilePath());
+                LOGGER.info("Moving to " + targetPath);
                 Files.move((photoFile.getFilePath()), targetPath);
             } else {
-                System.out.println("Would move to " + targetPath);
+                LOGGER.info("Would move to " + targetPath);
             }
 
             //Move metadata files
             for (String ext :
                     list) {
+                /* This does not work as additional sidecar files usually include the full file name and the sidecar extension (e.g. filename.arw.xmp and not only filename.xmp).
                 String tmpFileBase = getFileBase(photoFile.getFilePath().getFileName().toString());
+                 */
+                String tmpFileBase = photoFile.getFilePath().getFileName().toString();
 
                 if (tmpFileBase != null) {
                     File movableFile = new File(photoFile.getFilePath().getParent().toString() + File.separator + tmpFileBase + "." + ext);
                     if (movableFile.exists()) {
                         targetPath = Paths.get(targetParent + File.separator + movableFile.getName());
                         if (this.write) {
-                            System.out.println("Moving meta file to " + targetPath);
+                            LOGGER.info("Moving meta file to " + targetPath);
                             Files.move((movableFile.toPath()), targetPath);
                         } else {
-                            System.out.println("Would move meta file to " + targetPath);
+                            LOGGER.info("Would move meta file to " + targetPath);
                         }
                     }
                 } else {
-                    System.out.println("Filebase of " + photoFile.getFilePath().getFileName().toString() + " could not be determined. Skipping...");
+                    LOGGER.info("Filebase of " + photoFile.getFilePath().getFileName().toString() + " could not be determined. Skipping...");
                 }
             }
         }
 
     }
 
-    public void movePhotoToEvent(PhotoFile photoFile, Date eventStartDate) throws IOException {
+    private void movePhotoToEvent(PhotoFile photoFile, Date eventStartDate) throws IOException {
         SimpleDateFormat sdfEurope = new SimpleDateFormat(this.dateFormatFolders);
         sdfEurope.setTimeZone(this.timeZone);
         String sDateinEurope = sdfEurope.format(eventStartDate) + this.eventFileSuffix;
@@ -360,7 +280,7 @@ public class PhotoSorter {
 
     private void detectNewEvent(PhotoFile photoFile, Date dateOld, Date dateNew, boolean lastFile) throws IOException {
         if (dateOld == null) {
-            LOGGER.finest("Beginning... Using DateNew for first event");
+            LOGGER.finest("\nBeginning... Using DateNew for first event");
             this.eventStartDate = dateNew;
             this.dateOld = dateNew;
 
@@ -370,12 +290,21 @@ public class PhotoSorter {
         long dateDiffInHours = PhotoSorter.getDateDiff(dateOld, dateNew, TimeUnit.HOURS);
 
         if (dateDiffInHours > hoursBetweenEvents) {
-            LOGGER.finest("Found an event between \n  " + dateOld + " and \n  " + dateNew);
+            LOGGER.info("");
+            LOGGER.finest("Open event will be closed. HoursbetweenEvents exceeded. Range: \n  " + dateOld + " to \n  " + dateNew);
             this.eventEndDate = dateOld;
-
-            this.eventList.add(handleEvent(dateOld, dateNew));
+            //TODO this handles only the event before the last event. for the last event this has to be repeated and file has to be moved
+            this.eventList.add(handleEvent());
 
             this.eventStartDate = dateNew;
+            if (lastFile) {
+                //this is the last file. This means the last file's time range triggered an end of another event
+                //but should be an event by itself in the event list. This is what we do here
+                LOGGER.info("Last file leads to an additional event.");
+
+                this.eventEndDate = dateNew;
+                this.eventList.add(handleEvent());
+            }
             //after the new startDate for the event is set we can move the file to the new event folder
             movePhotoToEvent(photoFile, this.eventStartDate);
         } else {
@@ -386,38 +315,40 @@ public class PhotoSorter {
                 //if this is the lastfile but has not enough time between, still add it
                 LOGGER.finest("Found an event between \n  " + dateOld + " and \n  " + dateNew);
                 this.eventEndDate = dateNew;
-                this.eventList.add(handleEvent(dateOld, dateNew));
+                this.eventList.add(handleEvent());
             }
         }
     }
 
-    private PhotoEvent handleEvent(Date dateOld, Date dateNew) throws IOException {
+    private PhotoEvent handleEvent() {
         SimpleDateFormat sdfEurope = new SimpleDateFormat(this.dateFormatFolders);
         sdfEurope.setTimeZone(this.timeZone);
         String sDateinEurope = sdfEurope.format(this.eventStartDate) + this.eventFileSuffix;
-        System.out.println(sDateinEurope + " would be created as an event folder.");
-        File eventFile = new File(this.photosPath + File.separator + sDateinEurope);
+        LOGGER.finest(sDateinEurope + " would be created as an event folder.\n");
+        //File eventFile = new File(this.photosPath + File.separator + sDateinEurope);
 
         //eventFile.createNewFile();
 
         return new PhotoEvent(this.eventStartDate, this.eventEndDate);
     }
 
-    void printEventList(List<PhotoEvent> photoEventList) {
-        System.out.println("\nPrinting list of detected events...");
+    private void printEventList(List<PhotoEvent> photoEventList) {
+        LOGGER.info("\nPrinting list of detected events...");
         int i = 1;
         for (PhotoEvent pEvent :
                 photoEventList) {
-            System.out.println("Event " + i + " " + pEvent.toString());
+            LOGGER.info("Event " + i + " " + pEvent.toString());
             i++;
         }
     }
 
-    List<PhotoFile> listSourceFiles() throws IOException, ImageProcessingException, ParseException {
+    private List<PhotoFile> listSourceFiles() throws IOException, ImageProcessingException {
         List<PhotoFile> result = new ArrayList<>();
-        Date date = null;
+        Date date;
+
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(this.photosPath, "*.*")) {
             for (Path entry : stream) {
+                date = null;
                 PhotoFile photoFile;
 
                 String fileType = detectMimeType(entry);
@@ -432,7 +363,7 @@ public class PhotoSorter {
 
                     result.add(photoFile);
                 } else {
-                    System.out.println("Date of " + entry.getFileName() + " could not be determined. Skipping...");
+                    LOGGER.info("Date of " + entry.getFileName() + " could not be determined. Skipping for image processing...");
                 }
             }
         } catch (DirectoryIteratorException ex) {
@@ -445,7 +376,7 @@ public class PhotoSorter {
     /*Map<String, String> probeFiletypes() throws IOException, ImageProcessingException, ParseException, TikaException, SAXException {
         Map<String, String> result = new HashMap<>();
 
-        System.out.println("Probing for filetypes...");
+        LOGGER.info("Probing for filetypes...");
         Date date = null;
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(this.photosPath, "*")) {
             for (Path entry : stream) {
@@ -457,7 +388,7 @@ public class PhotoSorter {
 
                     if (result.get(fileType + ":" + fileExt) == null) {
                         result.put(fileType, fileExt);
-                        System.out.println("Found " + fileType);
+                        LOGGER.info("Found " + fileType);
 
                     }
 
@@ -478,12 +409,12 @@ public class PhotoSorter {
      * @param timeUnit the unit in which you want the diff
      * @return the diff value, in the provided unit
      */
-    public static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
+    private static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
         long diffInMillies = date2.getTime() - date1.getTime();
         return timeUnit.convert(diffInMillies, TimeUnit.MILLISECONDS);
     }
 
-    List<PhotoFile> sortList(List<PhotoFile> files) {
+    private List<PhotoFile> sortList(List<PhotoFile> files) {
         Collections.sort(files, new Comparator<PhotoFile>() {
             public int compare(PhotoFile o1, PhotoFile o2) {
                 return o1.getPhotoDate().compareTo(o2.getPhotoDate());
@@ -492,22 +423,24 @@ public class PhotoSorter {
         return files;
     }
 
-    void flagAllEvents(List<PhotoFile> sortedList) throws ImageProcessingException, IOException, ParseException {
+    private void flagAllEvents(List<PhotoFile> sortedList) throws IOException {
         for (int i = 0; i < sortedList.size(); i++) {
+            PhotoFile photoFile = sortedList.get(i);
+
             if (i == sortedList.size() - 1) {
-                parseFile(sortedList.get(i), true);
+                parseFile(photoFile, true);
             } else {
-                parseFile(sortedList.get(i), false);
+                parseFile(photoFile, false);
             }
         }
 
     }
 
-    public String detectMimeType(Path pathToDetect) throws IOException {
+    private String detectMimeType(Path pathToDetect) throws IOException {
         return tika.detect(pathToDetect);
     }
 
-    public List<PhotoEvent> getEventList() {
+    private List<PhotoEvent> getEventList() {
         return eventList;
     }
 
@@ -544,17 +477,15 @@ public class PhotoSorter {
 
             photoSorter.printEventList(photoSorter.getEventList());
 
-            //System.out.println(pathList.toString());
+            //LOGGER.info(pathList.toString());
 
 
         } catch (org.apache.commons.cli.ParseException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         } catch (ImageProcessingException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         }
 
 
