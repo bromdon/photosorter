@@ -18,6 +18,10 @@
         <processorPath useClasspath="true" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="photosorter_main" target="1.8" />
+      <module name="photosorter_test" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="CopyrightManager" default="GPL">
     <copyright>
@@ -178,7 +182,9 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/photosorter.iml" filepath="$PROJECT_DIR$/photosorter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/photosorter.iml" filepath="$PROJECT_DIR$/.idea/modules/photosorter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/photosorter_main.iml" filepath="$PROJECT_DIR$/.idea/modules/photosorter_main.iml" group="photosorter" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/photosorter_test.iml" filepath="$PROJECT_DIR$/.idea/modules/photosorter_test.iml" group="photosorter" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" assert-keyword="true" jdk-15="true" project-jdk-name="default" project-jdk-type="JavaSDK">

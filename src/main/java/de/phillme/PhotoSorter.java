@@ -62,6 +62,38 @@
  *     Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
  */
 
+/*
+ *     This file is part of photosorter.
+ *
+ *     photosorter is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     photosorter is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *     Diese Datei ist Teil von photosorter.
+ *
+ *     photosorter ist Freie Software: Sie können es unter den Bedingungen
+ *     der GNU General Public License, wie von der Free Software Foundation,
+ *     Version 3 der Lizenz oder (nach Ihrer Wahl) jeder späteren
+ *     veröffentlichten Version, weiterverbreiten und/oder modifizieren.
+ *
+ *     photosorter wird in der Hoffnung, dass es nützlich sein wird, aber
+ *     OHNE JEDE GEWÄHRLEISTUNG, bereitgestellt; sogar ohne die implizite
+ *     Gewährleistung der MARKTFÄHIGKEIT oder EIGNUNG FÜR EINEN BESTIMMTEN ZWECK.
+ *     Siehe die GNU General Public License für weitere Details.
+ *
+ *     Sie sollten eine Kopie der GNU General Public License zusammen mit diesem
+ *     Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
+ */
+
 
 package de.phillme;
 
@@ -89,6 +121,8 @@ import java.util.logging.SimpleFormatter;
 class PhotoSorter {
 
 
+    private boolean moveInsteadCopy = false;
+    private String actionName = "copy";
     private boolean noRename = false;
     private TimeZone timeZone;
     private Date dateOld;
@@ -129,6 +163,11 @@ class PhotoSorter {
         this.timeZone = TimeZone.getTimeZone(commandLine.getOptionValue("timezone", Calendar.getInstance().getTimeZone().getID()));
 
         this.noRename = commandLine.hasOption("n");
+        this.moveInsteadCopy = commandLine.hasOption("mv");
+
+        if (this.moveInsteadCopy) {
+            this.actionName = "move";
+        }
 
         LOGGER.info("\r\n  _____  _           _        _____            _            \r\n |  __ \\| |         | |      / ____|          | |           \r\n | |__) | |__   ___ | |_ ___| (___   ___  _ __| |_ ___ _ __ \r\n |  ___/| '_ \\ / _ \\| __/ _ \\\\___ \\ / _ \\| '__| __/ _ \\ '__|\r\n | |    | | | | (_) | || (_) |___) | (_) | |  | ||  __/ |   \r\n |_|    |_| |_|\\___/ \\__\\___/_____/ \\___/|_|   \\__\\___|_|   ");
 
@@ -146,6 +185,11 @@ class PhotoSorter {
             LOGGER.info("No-rename set. Photos will NOT be renamed.");
         } else {
             LOGGER.info("Using \"" + this.dateFormatPhotos + "\" as a date format for photos. Photos will be renamed.");
+        }
+        if (this.moveInsteadCopy) {
+            LOGGER.info("Moving files instead of copying.");
+        } else {
+            LOGGER.info("Copying files. Add '-mv' to move files.");
         }
         LOGGER.info("");
 
@@ -273,10 +317,15 @@ class PhotoSorter {
 
         if (targetPath != null) {
             if (this.write) {
-                LOGGER.info("Moving to " + targetPath);
-                Files.move((photoFile.getFilePath()), targetPath);
+                LOGGER.info(this.actionName + "-ing to " + targetPath);
+
+                if (this.moveInsteadCopy) {
+                    Files.move((photoFile.getFilePath()), targetPath);
+                } else {
+                    Files.copy((photoFile.getFilePath()), targetPath);
+                }
             } else {
-                LOGGER.info("Would move to " + targetPath);
+                LOGGER.info("Would " + this.actionName + " to " + targetPath);
             }
 
             //Move metadata files
@@ -292,10 +341,15 @@ class PhotoSorter {
                     if (movableFile.exists()) {
                         targetPath = Paths.get(targetParent + File.separator + fileName + "." + ext);
                         if (this.write) {
-                            LOGGER.info("Moving meta file to " + targetPath);
-                            Files.move((movableFile.toPath()), targetPath);
+                            LOGGER.info(this.actionName + "-ing meta file to " + targetPath);
+
+                            if (this.moveInsteadCopy) {
+                                Files.move((movableFile.toPath()), targetPath);
+                            } else {
+                                Files.copy((movableFile.toPath()), targetPath);
+                            }
                         } else {
-                            LOGGER.info("Would move meta file to " + targetPath);
+                            LOGGER.info("Would " + this.actionName + " meta file to " + targetPath);
                         }
                     }
                 } else {
