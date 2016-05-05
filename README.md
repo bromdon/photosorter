@@ -38,16 +38,21 @@ photosorter-1.0-SNAPSHOT
 All arguments are optional and contain sensible defaults.
 
 <pre>usage: PhotoSorter
- -dfe <arg>           Java date format for event folders.
- -h,--help            Print this message.
- -minhours <arg>      A new event is assumed when more than these hours
-                      have passed.
- -p,--path <arg>      Path to photos. If not specified the current working
-                      directory is used.
- -timezone <arg>      The timezone of the photos and events.
-                      'Europe/Berlin' for instance. If not specified the
-                      system timezone is assumed.
- -w,--write-changes   Write changes. Otherwise no changes are written!
+      -dfe <arg>           Events will be created with a folder name complying
+                           to this Java date format.
+      -dfp <arg>           Photos will be renamed to a name complying to this
+                           Java date format.
+      -h,--help            Print this message.
+      -minhours <arg>      A new event is assumed when more than these hours
+                           have passed.
+      -mv,--move           Moves files instead of copying them.
+      -n,--no-rename       If this is set files will not be rename when moving.
+      -p,--path <arg>      Path to photos. If not specified the current working
+                           directory is used.
+      -timezone <arg>      The timezone of the photos and events.
+                           'Europe/Berlin' for instance. If not specified the
+                           system timezone is assumed.
+      -w,--write-changes   Write changes. Otherwise no changes are written!
 </pre>
 
 <h2>Building with gradle:</h2>
