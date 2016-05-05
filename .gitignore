@@ -5,6 +5,5 @@
 out
 build/classes
 build/dependency-cache
-build/libs
 build/scripts
 build/tmp
